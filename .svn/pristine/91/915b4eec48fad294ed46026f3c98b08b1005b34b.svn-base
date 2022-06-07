@@ -1,0 +1,75 @@
+package user.command;
+
+import java.util.Enumeration;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
+import mvc.command.CommandHandler;
+
+public class UserHandler implements CommandHandler {
+	private static final String FORM_VIEW = "/WEB-INF/view/userForm.jsp";
+
+	@Override
+	public String process(HttpServletRequest rq, HttpServletResponse rp) throws Exception {
+
+		if (rq.getMethod().equalsIgnoreCase("POST")) {
+			return processSubmit(rq, rp);
+
+		} else if (rq.getMethod().equalsIgnoreCase("GET")) {
+			return processForm(rq, rp);
+		} else
+			return null;
+
+	}
+
+	private String processSubmit(HttpServletRequest rq, HttpServletResponse rp) {
+		String uploadPath = rq.getRealPath("upload");
+
+		int size = 10 * 1024 * 1024; // byte
+		String name = "";
+		String subject = "";
+
+		String filename1 = "";
+		String filename2 = "";
+
+		String origfilename1 = "";
+		String origfilename2 = "";
+
+		try {
+			MultipartRequest multi = new MultipartRequest(rq, uploadPath, size, "utf-8", new DefaultFileRenamePolicy());
+			name = multi.getParameter("name");
+			subject = multi.getParameter("subject");
+
+			System.out.println("test2");
+			Enumeration<String> files = multi.getFileNames();
+
+			String file1 = files.nextElement();
+			filename1 = multi.getFilesystemName(file1);
+			origfilename1 = multi.getOriginalFileName(file1);
+
+			String file2 = files.nextElement();
+			filename2 = multi.getFilesystemName(file2);
+			origfilename2 = multi.getOriginalFileName(file2);
+
+			System.out.println("user file : " + name);
+			System.out.println("user file : " + subject);
+			System.out.println("user file : " + filename1);
+			System.out.println("user file : " + origfilename1);
+			System.out.println("user file : " + filename2);
+			System.out.println("user file : " + origfilename2);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return FORM_VIEW;
+	}
+
+	private String processForm(HttpServletRequest rq, HttpServletResponse rp) {
+
+		return null;
+	}
+}

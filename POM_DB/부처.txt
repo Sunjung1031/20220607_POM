@@ -1,0 +1,21 @@
+고유번호
+부처명
+
+
+drop table ministry;
+
+create table ministry(
+mini_no int(5) primary key,
+mini_name varchar(10) not null
+) engine=InnoDB default character set=utf8;
+
+insert into ministry ( mini_no, mini_name ) values ( 10, '경영처');
+insert into ministry ( mini_no, mini_name ) values ( 20, '회계처');
+insert into ministry ( mini_no, mini_name ) values ( 30, '무역처');
+insert into ministry ( mini_no, mini_name ) values ( 40, '개발처');
+insert into ministry ( mini_no, mini_name ) values ( 50, '국내영업처');
+insert into ministry ( mini_no, mini_name ) values ( 60, '국외영업처');
+insert into ministry ( mini_no, mini_name ) values ( 70, '인사관리처');
+insert into ministry ( mini_no, mini_name ) values ( 80, '법무처');
+
+select * from ministry;

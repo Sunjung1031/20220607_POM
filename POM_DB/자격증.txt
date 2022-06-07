@@ -1,0 +1,18 @@
+사번
+자격증이름
+자격증취득일
+
+drop table license;
+
+
+create table license(
+no int(5) not null,
+lic_no int(1) not null,
+license varchar(30) not null,
+license_day date not null
+)engine=InnoDB character set = utf8;
+ 
+insert into license(no, lic_no, license, license_day) values
+('1', '1' ,'한컴타자 서기' ,'2020-02-05');
+
+select * from license;

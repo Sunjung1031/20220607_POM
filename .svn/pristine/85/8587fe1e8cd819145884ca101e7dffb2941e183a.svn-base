@@ -1,0 +1,67 @@
+package user.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import jdbc.JdbcUtil;
+import user.model.User;
+
+public class UserDAO {
+	private PreparedStatement pstmt;
+	private ResultSet rs;
+	
+	public User select(Connection conn, User user, int no) throws SQLException{
+		pstmt = conn.prepareStatement("select * from user where no = ?");
+		pstmt.setInt(1, no);
+		
+		try {
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				user = new User(rs.getInt(1), null, rs.getString(3), rs.getInt(4), 
+						rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8),
+						rs.getString(9), rs.getDate(10), rs.getInt(11), rs.getInt(12), 
+						rs.getString(13), rs.getString(14), rs.getString(15), rs.getString(16), 
+						rs.getString(17), rs.getInt(18), rs.getDate(19), rs.getString(20), rs.getDate(21));
+			}
+		} catch (Exception e) {
+			System.out.println("error : UserDAO.selectAll.select()");
+			System.out.println(e.getMessage());
+		} finally {
+			JdbcUtil.close(pstmt, rs);
+		}
+		return user;
+	}
+	
+	public User modify(Connection conn, User user) throws SQLException{
+		pstmt = conn.prepareStatement("update user set face=?, phone=?, addr=?, email=?, tall=?, weight=?, eye_l=?, eye_r=?, marry=?, disabled=?, disabled_grade=?, disabled_day=?, license=?, license_day=? where no=? ");
+		
+		//pstmt.set  (1, user.getFace());
+		pstmt.setString(2, user.getPhone());
+		pstmt.setString(3, user.getAddr());
+		pstmt.setString(4, user.getEmail());
+		pstmt.setInt(5, user.getTall());
+		pstmt.setInt(6, user.getWeight());
+		pstmt.setString(7, user.getEye_l());
+		pstmt.setString(8, user.getEye_r());
+		pstmt.setString(9, user.getMarry());
+		pstmt.setString(10, user.getDisabled());
+		pstmt.setInt(11, user.getDisabled_grade());
+		pstmt.setDate(12, user.getDisabled_day());
+		pstmt.setString(13, user.getLicense());
+		pstmt.setDate(14, user.getLicense_day());
+		pstmt.setInt(15, user.getNo());
+		
+		try {
+			pstmt.executeUpdate();
+		} catch(Exception e) {
+			System.out.println("error : UserDAO.modify()");
+			System.out.println(e.getMessage());
+		} finally {
+			JdbcUtil.close(pstmt, rs);
+		}
+		return user;
+	}
+
+}

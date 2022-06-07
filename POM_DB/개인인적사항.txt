@@ -1,0 +1,48 @@
+-사번
+-사진
+-이름
+-주민번호
+-연락처
+-이메일
+-최종학력(학교명, 전공, 졸업년도)
+-주소
+-신장
+-체중
+-시력 (좌, 우)
+-성별
+-결혼여부
+-장애인구분
+-장애인등급
+-장애등록일
+-자격증
+-자격취득일
+
+drop table user;
+
+create table user(
+no int(5) not null auto_increment primary key,
+filename varchar(20),
+filerealname varchar(20),
+name varchar(20) not null,
+reg_num int(15) unique not null,
+phone varchar(11) not null,
+addr varchar(100) not null,
+email varchar(30) not null,
+school_name varchar(20) not null,
+school_major varchar(30) not null,
+school_out date not null,
+tall int(3) not null,
+Weight int(3) not null,
+eye_L varchar(4) not null,
+eye_R varchar(4) not null,
+gender varchar(1) not null,
+marry varchar(1) not null,
+disabled varchar(1) not null,
+disabled_grade int(1),
+disabled_day date
+) engine=InnoDB character set = utf8;
+
+INSERT INTO USER(filename, filerealname, name, reg_num, phone, addr, email, school_name, school_major,school_out, tall, weight, eye_L, eye_R, gender, marry, disabled,disabled_grade,disabled_day)
+VALUES('sung.jpg','sung.jsp','sung',910508124,01057865845,'서울특별시 구로구 디지털로32길 97-16','stephano_sung@hanmail.net','원광대학교','경영학부','20220523','170','70','2.0','2.0','M','N','Y','5','20220523');
+
+select * from user;

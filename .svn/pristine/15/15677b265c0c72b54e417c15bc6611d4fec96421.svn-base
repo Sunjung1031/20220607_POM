@@ -1,0 +1,286 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>main</title>
+<style>
+body {
+	display: flex;
+	justify-content: center;
+	font-family: 'Open Sans', sans-serif;
+}
+
+form {
+	width: 50%;
+	display: inline-block;
+	margin-top: 50px;
+	margin: 0 20px;
+	height: 800px;
+}
+
+table {
+	width: 100%;
+	border: none;
+}
+
+tr {
+	/* display: flex;
+	justify-content: center;
+	align-items: center; */
+	
+}
+
+td {
+	border: none;
+	color: #8C8C8C;
+	text-align: center;
+	height: 35px;
+	padding: 0;
+}
+
+.td_title {
+	color: #747474;
+	text-align: center;
+	height: 35px;
+	font-weight: bold;
+	border-bottom: 1px solid gray;
+}
+
+.no_a {
+	color: #8C8C8C;
+}
+
+.no_a:hover {
+	text-decoration-line: none;
+}
+
+.head_text {
+	font-weight: bold;
+	font-size: 25px;
+	border-bottom: 2px solid gray;
+	color: black;
+	text-align: left;
+}
+
+.trTarget :nth-child(1) {
+	width: 15%;
+}
+
+.trTarget :nth-child(3) {
+	width: 15%;
+}
+
+.trTarget :nth-child(4) {
+	width: 20%;
+}
+
+.trTarget :nth-child(2) {
+	width: 40%;
+}
+
+#tr_page_a {
+	padding-top: 15px;
+}
+
+.page_a {
+	margin: 0 10px;
+	text-decoration-line: none;
+	color: #8C8C8C;
+}
+
+.page_a:hover {
+	margin: 0 10px;
+	text-decoration-line: none;
+	color: #5d5d5d;
+}
+
+#btn_div {
+	float: right;
+	margin-top: 30px;
+}
+
+.input_btn {
+	background-color: #353535;
+	color: #EAEAEA;
+	padding: auto 30px;
+	border-radius: 2px;
+	border: none;
+}
+
+.input_btn:hover {
+	background-color: #8C8C8C;
+	color: #EAEAEA;
+}
+
+.submit_btn {
+	background-color: #353535;
+	color: #EAEAEA;
+	padding: auto 30px;
+	border-radius: 2px;
+	border: none;
+	width: 100px;
+	height: 30px;
+	font-size: 15px;
+	font-weight: 400;
+}
+
+.submit_btn:hover {
+	background-color: #8C8C8C;
+	color: #EAEAEA;
+}
+
+.td_title {
+	color: #747474;
+	text-align: center;
+	height: 35px;
+	font-weight: bold;
+	border-bottom: 1px solid gray;
+}
+
+.box_line {
+	
+}
+</style>
+</head>
+<body>
+	<%
+	String a = "readonly";
+	String b = "type='hidden'";
+	request.setCharacterEncoding("euc-kr");
+	%>
+	<c:if test="${modify}">
+		<%
+		a = "required";
+		b = "type='button'";
+		%>
+	</c:if>
+	<form action="main.do" method="post">
+		<table border='1'>
+			<tr>
+				<td colspan="12" height="50px"><input type="text" name="search"
+					style="width: 40%; height: 24px; margin: 30px 0;" value="" />
+					<button class="input_btn" type="submit"
+						style="width: 70px; height: 30px;">検索</button></td>
+			</tr>
+			<tr>
+				<td class="td_title">社員番号</td>
+				<td class="td_title">名前</td>
+				<td class="td_title">部署</td>
+				<td class="td_title">官庁</td>
+			</tr>
+			<c:forEach var="personnelList" items="${personnelList }">
+
+				<tr class="box_line">
+					<td><a class="no_a" href="main.do?no=${personnelList.no }">${personnelList.no }</a>
+					</td>
+					<td>${personnelList.name }</td>
+					<td>${personnelList.job_position }</td>
+					<td>${personnelList.salary_class }</td>
+				</tr>
+			</c:forEach>
+		</table>
+	</form>
+	<form action="main.do" method="post">
+		<table border='1'>
+			<tr>
+				<td>社員番号</td>
+				<td><input type="text" name="no" value="${personnel.no}"
+					<%=a %> /></td>
+			</tr>
+			<tr>
+				<td>職級</td>
+				<td><input type="text" name="job_position"
+					value="${personnel.job_position}" <%=a %> /></td>
+			</tr>
+			<tr>
+				<td>号俸</td>
+				<td><input type="text" name="salary_class"
+					value="${personnel.salary_class}" <%=a %> /></td>
+			</tr>
+			<tr>
+				<td>官庁</td>
+				<td><input type="text" name="mini_no"
+					value="${personnel.mini_no}" <%=a %> /></td>
+			</tr>
+			<tr>
+				<td>部署</td>
+				<td><input type="text" name="dept_no"
+					value="${personnel.dept_no}" <%=a %> /></td>
+			</tr>
+			<tr>
+				<td>給与</td>
+				<td><input type="text" name="money" value="${personnel.money}"
+					<%=a %> /></td>
+			</tr>
+			<tr>
+				<td>入社日</td>
+				<td><input type="date" name="enter_date"
+					value="${personnel.enter_date}" <%=a %> /></td>
+			</tr>
+			<tr>
+				<td>退社日</td>
+				<td><input type="date" name="resign_date"
+					value="${personnel.resign_date }" <%=a %> /></td>
+			</tr>
+			<tr>
+				<td>教育履歴</td>
+				<td>
+				<input type="text" name="edu_content"
+					value="${personnel.edu_content}" <%=a%> /></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><input <%=b%> value="追加" /></td>
+			</tr>
+			<tr>
+				<td>業務履歴_官庁</td>
+				<td><input type="text" name="ex_mini_no"
+					value="${personnel.ex_mini_no}" <%=a %> /></td>
+			</tr>
+			<tr>
+				<td>業務履歴_部署</td>
+				<td><input type="text" name="ex_dept_no"
+					value="${personnel.ex_dept_no}" <%=a %> /></td>
+			</tr>
+			<tr>
+				<td>期間</td>
+				<td><input type="date" name="ex_begin_date"
+					value="${personnel.ex_begin_date }" <%=a%> /> - <input type="date"
+					name="ex_end_date" value="${personnel.ex_end_date }" <%=a%> /></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><input <%=b%> value="追加" /></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><c:choose>
+						<c:when test="${modify}">
+							<input type="submit" value="登録"
+								style="width: 70px; height: 30px;" />
+						</c:when>
+						<c:otherwise>
+							<input type="button"
+								onclick="location.href='main.do?modify=true&no=${personnel.no}'"
+								value="修正" style="width: 70px; height: 30px;" />
+						</c:otherwise>
+					</c:choose></td>
+			</tr>
+			<!-- 					<button class="input_btn" type="submit" style="width: 70px; height: 30px;">確認</button> -->
+			<!-- <tr>
+				<button class="input_btn" type="submit" style="width: 70px; height: 30px;">人事記録</button>
+				<button class="input_btn" type="submit" style="width: 70px; height: 30px;">人事記録</button>
+			</tr>
+			<tr>
+				<button class="input_btn" type="submit" style="width: 70px; height: 30px;">検索</button>
+			</tr>
+			<tr>
+				<input class="input_btn" type="button" onClick="'location.href='" style='width: 70px; height: 30px;' value="기록" />
+			</tr> -->
+		</table>
+	</form>
+</body>
+</html>

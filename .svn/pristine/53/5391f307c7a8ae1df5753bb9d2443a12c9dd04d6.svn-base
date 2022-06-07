@@ -1,0 +1,154 @@
+package main.command;
+
+import java.sql.Date;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import main.model.WorkExperience;
+import main.service.WEService;
+import mvc.command.CommandHandler;
+import personnel.model.Personnel;
+import personnel.service.PersonnelService;
+
+public class MainHandler implements CommandHandler {
+	private final static String MAIN_FORM = "WEB-INF/view/main.jsp";
+	private Personnel personnel = null;
+	private WEService weService = null;
+	private ArrayList<WorkExperience> weList = null;
+	private ArrayList<Personnel> personnelList = null;
+	private ArrayList<WorkExperience> workExperiences = null;
+	private PersonnelService personalService = null;
+
+	@Override
+	public String process(HttpServletRequest rq, HttpServletResponse rp) throws Exception {
+		System.out.println("process");
+		if (rq.getMethod().equalsIgnoreCase("POST")) {
+			return processSubmit(rq, rp);
+		} else if (rq.getMethod().equalsIgnoreCase("GET")) {
+			return processForm(rq, rp);
+		} else {
+			System.out.println("error : MainHandler.process()");
+			return null;
+		}
+	}
+
+	private String processForm(HttpServletRequest rq, HttpServletResponse rp) throws SQLException {
+		System.out.println("processForm");
+		personalService = new PersonnelService();
+		if (rq.getParameter("choose") != null) {
+			if (rq.getParameter("choose").equalsIgnoreCase("personnel"))
+				rq.setAttribute("choose", Boolean.TRUE);
+			else
+				rq.setAttribute("choose", Boolean.FALSE);
+		}
+		personnel = new Personnel();
+		weService = new WEService();
+		System.out.println("test");
+		if (rq.getParameter("no") != null) {
+			System.out.println("test1");
+
+			int no = Integer.parseInt(rq.getParameter("no"));
+			System.out.println("test1_1");
+			personnel = personalService.getPeronsonel(personnel, no);
+			System.out.println("test2");
+			if (rq.getParameter("modify") != null) {
+				rq.setAttribute("modify", Boolean.TRUE);
+			}
+			System.out.println("test2_1");
+			weList = new ArrayList<WorkExperience>();
+			weList = weService.GetAllWEList(no);
+			System.out.println("test3");
+			rq.setAttribute("workexperience", weList);
+			rq.setAttribute("personnel", personnel);
+		}
+		return MAIN_FORM;
+	}
+
+	private String processSubmit(HttpServletRequest rq, HttpServletResponse rp) throws Exception {
+		System.out.println("processSubmit");
+		PersonnelService personalService = new PersonnelService();
+		if (rq.getParameter("search") != null) {
+			System.out.println("processSubmit 1");
+			String search = rq.getParameter("search");
+			System.out.println("processSubmit 1_1");
+			personnelList = personalService.getSearchPersonnel(search);
+			System.out.println("processSubmit 1_2");
+			rq.setAttribute("personnelList", personnelList);
+			return MAIN_FORM;
+		}
+		System.out.println("processSubmit 2");
+		weService = new WEService();
+		personnel = new Personnel();
+		if (rq.getParameter("choose") != null) {
+			System.out.println("processSubmit 3");
+			if (rq.getParameter("choose").equalsIgnoreCase("personnel"))
+				rq.setAttribute("choose", Boolean.TRUE);
+			else
+				rq.setAttribute("choose", Boolean.FALSE);
+		}
+		Date ex_begin_date = null;
+		Date ex_end_date = null;
+
+		// current
+		System.out.println("processSubmit 3");
+		workExperiences = new ArrayList<WorkExperience>();
+		System.out.println("processSubmit 4");
+		for (int i = 1; i < 5; i++) {
+			System.out.println("processSubmit 5");
+			if (rq.getParameter("we_no" + i) != null) {
+				ex_end_date = Datering(rq, rq.getParameter("ex_end_date" + i));
+				ex_begin_date = Datering(rq, rq.getParameter("ex_begin_date" + i));
+				System.out.println("test0 :" + rq.getParameter("mini_no"));
+				System.out.println("test :" + rq.getParameter("ex_dept_no" + i));
+				workExperiences.add(new WorkExperience(Integer.parseInt(rq.getParameter("no")),
+						Integer.parseInt(rq.getParameter("we_no" + i)),
+						Integer.parseInt(rq.getParameter("ex_dept_no" + i)),
+						Integer.parseInt(rq.getParameter("ex_mini_no" + i)), ex_begin_date, ex_end_date));
+			}
+		}
+		System.out.println("processSubmit 6");
+		weService.InsertAllWE(workExperiences);
+
+		Date enter_date = null;
+		if (rq.getParameter("enter_date") != null)
+			enter_date = Datering(rq, rq.getParameter("enter_date"));
+		Date resign_date = null;
+		if (rq.getParameter("resign_date") != null)
+			resign_date = Datering(rq, rq.getParameter("resign_date"));
+		if (rq.getParameter("ex_begin_date") != null)
+			ex_begin_date = Datering(rq, rq.getParameter("ex_begin_date"));
+		if (rq.getParameter("ex_end_date") != null)
+			ex_end_date = Datering(rq, rq.getParameter("ex_end_date"));
+
+		System.out.println("processSubmit 7");
+		personnel = new Personnel(Integer.parseInt(rq.getParameter("no")), rq.getParameter("name"),
+				Integer.parseInt(rq.getParameter("job_position")), Integer.parseInt(rq.getParameter("salary_class")),
+				Integer.parseInt(rq.getParameter("mini_no")), Integer.parseInt(rq.getParameter("dept_no")),
+				Integer.parseInt(rq.getParameter("money")), enter_date, resign_date, rq.getParameter("edu_content"),
+				Integer.parseInt(rq.getParameter("ex_mini_no1")), Integer.parseInt(rq.getParameter("ex_dept_no1")),
+				ex_begin_date, ex_end_date);
+		System.out.println("processSubmit 8");
+		personnel = personalService.modifyPersonnel(personnel);
+		System.out.println("processSubmit 9");
+		rq.setAttribute("personnelList", personnelList);
+		rq.setAttribute("personnel", personnel);
+		return MAIN_FORM;
+	}
+
+	private Date Datering(HttpServletRequest rq, Object value) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date dating = null;
+		try {
+			String param = (String) value;
+			dating = new Date(sdf.parse(param).getTime());
+		} catch (Exception e) {
+			System.out.println("error : Datering");
+			System.out.println(e.getMessage());
+		}
+		return dating;
+	}
+}

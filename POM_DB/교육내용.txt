@@ -1,0 +1,15 @@
+사원번호
+교육내용
+
+drop table edu;
+
+create table edu(
+no int (5) not null,
+edu_no int(1) not null,
+edu_content text not null
+)engine=InnoDB character set = utf8; 
+
+
+insert into edu values
+(1 ,1, '경기도 연수원에서 행정교육 수료'),
+(1,2, '충청도 연수원에서 민원교육 수료');

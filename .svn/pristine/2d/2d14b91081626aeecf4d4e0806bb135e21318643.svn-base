@@ -1,0 +1,129 @@
+package personnel.model;
+
+
+public class PersonnelRequest {
+
+	private int job_position;
+	private int salary_class;
+
+	private int mini_no;
+	private int dept_no;
+	private int money;
+	private int ex_mini_no;
+	private int ex_dept_no;
+
+	private String mini_name;
+	private String dept_name;
+	private String ex_mini_name;
+	private String ex_dept_name;
+
+	public PersonnelRequest(String mini_name, String dept_name, String ex_mini_name, String ex_dept_name) {
+		this.mini_name = mini_name;
+		this.dept_name = dept_name;
+		this.ex_mini_name = ex_mini_name;
+		this.ex_dept_name = ex_dept_name;
+
+	}
+
+	public void setMoney(int money) {
+		this.money = money;
+	}
+
+	public PersonnelRequest() {
+	}
+
+	public PersonnelRequest(int job_position, int salary_class, int mini_no, int dept_no, int money, int ex_mini_name,
+			int ex_dept_name) {
+		this.job_position = job_position;
+		this.salary_class = salary_class;
+		this.mini_no = mini_no;
+		this.dept_no = dept_no;
+		this.money = money;
+	}
+
+	public int getMoney() {
+		return money;
+	}
+
+	public String getMini_name() {
+		return mini_name;
+	}
+
+	public void setMini_name(String mini_name) {
+		this.mini_name = mini_name;
+	}
+
+	public String getDept_name() {
+		return dept_name;
+	}
+
+	public void setDept_name(String dept_name) {
+		this.dept_name = dept_name;
+	}
+
+	public String getEx_mini_name() {
+		return ex_mini_name;
+	}
+
+	public void setEx_mini_name(String ex_mini_name) {
+		this.ex_mini_name = ex_mini_name;
+	}
+
+	public String getEx_dept_name() {
+		return ex_dept_name;
+	}
+
+	public void setEx_dept_name(String ex_dept_name) {
+		this.ex_dept_name = ex_dept_name;
+	}
+
+
+	public int getJob_position() {
+		return job_position;
+	}
+
+	public void setJob_position(int job_position) {
+		this.job_position = job_position;
+	}
+
+	public int getSalary_class() {
+		return salary_class;
+	}
+
+	public void setSalary_class(int salary_class) {
+		this.salary_class = salary_class;
+	}
+
+	public int getMini_no() {
+		return mini_no;
+	}
+
+	public void setMini_no(int mini_no) {
+		this.mini_no = mini_no;
+	}
+
+	public int getDept_no() {
+		return dept_no;
+	}
+
+	public void setDept_no(int dept_no) {
+		this.dept_no = dept_no;
+	}
+
+	public int getEx_mini_no() {
+		return ex_mini_no;
+	}
+
+	public void setEx_mini_no(int ex_mini_no) {
+		this.ex_mini_no = ex_mini_no;
+	}
+
+	public int getEx_dept_no() {
+		return ex_dept_no;
+	}
+
+	public void setEx_dept_no(int ex_dept_no) {
+		this.ex_dept_no = ex_dept_no;
+	}
+
+}

@@ -1,0 +1,2 @@
+/main.do=main.command.MainHandler
+#/ajax.do=ajax.command.AjaxClassHandler

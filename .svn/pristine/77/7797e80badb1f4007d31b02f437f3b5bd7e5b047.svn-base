@@ -1,0 +1,28 @@
+package main.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+public class EduDAO {
+	private PreparedStatement pstmt;
+	private ResultSet rs;
+
+	public void selectAllEduByNo(Connection conn, int no) {
+		try {
+
+			pstmt = conn.prepareStatement("select * from edu where no = ?");
+			pstmt.setInt(1, no);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		} finally {
+
+		}
+
+	}
+
+}

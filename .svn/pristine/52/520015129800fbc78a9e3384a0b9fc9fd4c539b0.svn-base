@@ -1,0 +1,30 @@
+package main.service;
+
+import java.sql.Connection;
+import java.util.ArrayList;
+
+import jdbc.connection.ConnectionProvider;
+import main.dao.EduDAO;
+import main.model.Edu_Content;
+
+public class EduService {
+	private Connection conn;
+	private EduDAO eduDao = null;
+	private ArrayList<Edu_Content> eduList = new ArrayList<Edu_Content>();
+	
+	public ArrayList<Edu_Content> GetAllEduList(int no) {
+		try {
+			conn = ConnectionProvider.getConnection();
+		    eduDao.selectAllEduByNo(conn,no);
+		} catch (Exception e) {
+			
+			
+			
+		} finally {
+
+		}
+
+		return null;
+	}
+
+}

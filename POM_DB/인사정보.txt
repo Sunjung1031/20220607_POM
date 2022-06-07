@@ -1,0 +1,40 @@
+사원번호
+이름
+직급
+호봉
+급여
+부처번호
+부서번호
+교육내용
+입사일
+퇴사일
+
+社員番号					
+職級					
+号俸					
+官庁					
+部署					
+給与					
+入社日					
+退社日					
+教育履歴					
+業務履歴					
+									
+
+drop table personnel;
+
+create table personnel(
+no int (5) primary key,
+name varchar(14) not null,
+job_position int(2) ,
+salary_class int(1),
+money int(9),
+mini_no int(5),
+dept_no int(3),
+enter_date date,
+resign_date date
+)engine=InnoDB character set = utf8;
+
+insert into personnel( no, name ) values (1, '코스모');
+
+select * from personnel

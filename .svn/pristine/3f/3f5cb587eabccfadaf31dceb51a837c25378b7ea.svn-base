@@ -1,0 +1,88 @@
+package personnel.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+
+import jdbc.JdbcUtil;
+import personnel.model.Personnel;
+
+public class PersonnelDAO {
+	private PreparedStatement pstmt;
+	private ResultSet rs;
+
+	public ArrayList<Personnel> selectAll(Connection conn, ArrayList<Personnel> personnelList) {
+		try {
+			pstmt = conn.prepareStatement("select * from personnel");
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				personnelList.add(new Personnel(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getInt(4)));
+			}
+		} catch (Exception e) {
+			System.out.println("error : PersonnelDAO.selectAll()");
+			System.out.println(e.getMessage());
+		} finally {
+			JdbcUtil.close(pstmt, rs);
+		}
+		return personnelList;
+	}
+
+	public Personnel select(Connection conn, Personnel personnel, int no) {
+		try {
+			pstmt = conn.prepareStatement("select * from personnel where no = ? ");
+			pstmt.setInt(1, no);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				personnel = new Personnel(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getInt(5),
+						rs.getInt(6), rs.getInt(7), rs.getString(8), rs.getDate(9), rs.getDate(10));
+			}
+		} catch (Exception e) {
+			System.out.println("error : PersonnelDAO.select()");
+			System.out.println(e.getMessage());
+		} finally {
+			JdbcUtil.close(pstmt, rs);
+		}
+		return personnel;
+	}
+
+	public Personnel modify(Connection conn, Personnel personnel) {
+		try {
+			pstmt = conn.prepareStatement(
+					"update personnel set job_position = ? , salary_class =? ,mini_no=? ,dept_no =?,enter_date=? ,resign_date=? ,edu_content=?  where no = ? ");
+			pstmt.setInt(1, personnel.getJob_position());
+			pstmt.setInt(2, personnel.getSalary_class());
+			pstmt.setInt(3, personnel.getMini_no());
+			pstmt.setInt(4, personnel.getDept_no());
+			pstmt.setDate(5, personnel.getEnter_date());
+			pstmt.setDate(6, personnel.getResign_date());
+			pstmt.setString(7, personnel.getEdu_content());
+			pstmt.setInt(8, personnel.getNo());
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("error : PersonnelDAO.modify()");
+			System.out.println(e.getMessage());
+		} finally {
+			JdbcUtil.close(pstmt, rs);
+		}
+		return personnel;
+	}
+
+	public ArrayList<Personnel> search(String search, Connection conn, ArrayList<Personnel> personnelList) {
+		try {
+			pstmt = conn
+					.prepareStatement("select no, name, job_position, salary_class from personnel where no like ? ");
+			pstmt.setString(1, '%' + search + '%');
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				personnelList.add(new Personnel(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getInt(4)));
+			}
+		} catch (Exception e) {
+			System.out.println("error : PersonnelDAO.search()");
+			System.out.println(e.getMessage());
+		} finally {
+			JdbcUtil.close(pstmt, rs);
+		}
+		return personnelList;
+	}
+}
