@@ -393,12 +393,12 @@ select {
 	</c:if>
 	<c:if test="${wrongRoute }">
 		<script type="text/javascript">
-			alert('사원 번호를 클릭해주세요');
+			alert('社員番号をクリックしてください。');
 		</script>
 	</c:if>
 	<c:if test="${searchError2 }">
 		<script type="text/javascript">
-			alert('종류를 선택해주세요');
+			alert('種類を選択してください。');
 		</script>
 	</c:if>
 

@@ -25,7 +25,7 @@ public class UserService {
 		}
 		return user;
 	}
-	public User getUserByReg_num(User user, long reg_num)  {
+	public User getUserByReg_num(User user, String reg_num)  {
 		try {
 			conn = ConnectionProvider.getConnection();
 			user = userDao.selectByReg_num(conn, user, reg_num);

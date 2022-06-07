@@ -90,6 +90,8 @@ public class UserHandler implements CommandHandler {
 		System.out.println("test3");
 		ArrayList<License> licenseList = new ArrayList<License>();
 		licenseList = licenseService.GetAllLicenseList(no);
+		System.out.println("test4");
+		
 		rq.setAttribute("licenseList", licenseList);
 
 		if (rq.getMethod().equalsIgnoreCase("POST"))
@@ -101,7 +103,6 @@ public class UserHandler implements CommandHandler {
 	}
 
 	private String processForm(HttpServletRequest rq, HttpServletResponse rs) throws SQLException {
-		System.out.println("test3_5");
 
 		return MAIN_FORM;
 	}
@@ -146,7 +147,7 @@ public class UserHandler implements CommandHandler {
 
 		System.out.println("disabled_day :" + disabled_day);
 		user = new User(no, rq.getParameter("filename"), rq.getParameter("filerealname"), rq.getParameter("name"),
-				Long.parseLong(rq.getParameter("reg_num")), rq.getParameter("phone"), rq.getParameter("addr"),
+				rq.getParameter("reg_num"), rq.getParameter("phone"), rq.getParameter("addr"),
 				rq.getParameter("email"), rq.getParameter("school_name"), rq.getParameter("school_major"), school_out,
 				Integer.parseInt(rq.getParameter("tall")), Integer.parseInt(rq.getParameter("weight")),
 				rq.getParameter("eye_l"), rq.getParameter("eye_r"), rq.getParameter("gender"), rq.getParameter("marry"),

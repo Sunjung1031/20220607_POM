@@ -14,13 +14,13 @@ public class UserDAO {
 	private PreparedStatement pstmt;
 	private ResultSet rs;
 
-	public User selectByReg_num(Connection conn, User user, long reg_num) throws SQLException {
+	public User selectByReg_num(Connection conn, User user, String reg_num) throws SQLException {
 		pstmt = conn.prepareStatement("select * from user where reg_num = ?");
-		pstmt.setLong(1, reg_num);
+		pstmt.setString(1, reg_num);
 		try {
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				user = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getLong(5),
+				user = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
 						rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10),
 						rs.getDate(11), rs.getInt(12), rs.getInt(13), rs.getString(14), rs.getString(15),
 						rs.getString(16), rs.getString(17), rs.getString(18), rs.getInt(19), rs.getDate(20));
@@ -39,7 +39,7 @@ public class UserDAO {
 		try {
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				user = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getLong(5),
+				user = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
 						rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10),
 						rs.getDate(11), rs.getInt(12), rs.getInt(13), rs.getString(14), rs.getString(15),
 						rs.getString(16), rs.getString(17), rs.getString(18), rs.getInt(19), rs.getDate(20));
@@ -95,7 +95,7 @@ public class UserDAO {
 			 * user.getName());
 			 */
 			System.out.println("reg_num : " + user.getReg_num());
-			pstmt.setLong(2, user.getReg_num());
+			pstmt.setString(2, user.getReg_num());
 			pstmt.setString(3, user.getPhone());
 			pstmt.setString(4, user.getAddr());
 			pstmt.setString(5, user.getEmail());
@@ -121,10 +121,10 @@ public class UserDAO {
 		}
 	}
 
-	public Boolean checkUser(Connection conn, long reg_num) throws SQLException {
+	public Boolean checkUser(Connection conn, String reg_num) throws SQLException {
 		Boolean result = false;
 		pstmt = conn.prepareStatement("select * from user where reg_num = ?");
-		pstmt.setLong(1, reg_num);
+		pstmt.setString(1, reg_num);
 		try {
 			rs = pstmt.executeQuery();
 			if (rs.next()) {

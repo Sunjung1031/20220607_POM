@@ -35,9 +35,9 @@ edu_content text not null
 )engine=InnoDB character set = utf8; 
 
 
-insert into edu values
-(1 ,1, '경기도 연수원에서 행정교육 수료'),
-(1,2, '충청도 연수원에서 민원교육 수료');
+--insert into edu values
+--(1 ,1, '경기도 연수원에서 행정교육 수료'),
+--(1,2, '충청도 연수원에서 민원교육 수료');
 
 drop table dept;
 
@@ -83,38 +83,12 @@ start_date datetime default now() not null,
 end_date date not null
 ) engine=InnoDB default character set=utf8;
 
-insert into workExperience ( no, we_no ,dept_no, mini_no , start_date, end_date) values ( 1,1 , 60, 30, '2022-05-18', '2022-06-19');
-insert into workExperience ( no, we_no ,dept_no, mini_no , start_date, end_date) values ( 2,1 , 80, 40, '2022-05-18', '2022-06-19');
-insert into workExperience ( no, we_no ,dept_no, mini_no , start_date, end_date) values ( 3,1 , 60, 20, '2022-05-18', '2022-06-19'); 
-insert into workExperience ( no, we_no ,dept_no, mini_no , start_date, end_date) values ( 4,1 , 50, 60, '2022-05-18', '2022-06-19');
-insert into workExperience ( no, we_no ,dept_no, mini_no , start_date, end_date) values ( 5,1 , 40, 70, '2022-05-18', '2022-06-19');
-insert into workExperience ( no, we_no ,dept_no, mini_no , start_date, end_date) values ( 6,1 , 40, 70, '2022-05-18', '2022-06-19');
-
-insert into workExperience ( no, we_no ,dept_no, mini_no , start_date, end_date) values ( 1,2 , 10, 20, '2022-05-18', '2022-06-19');
-insert into workExperience ( no, we_no ,dept_no, mini_no , start_date, end_date) values ( 2,2 , 60, 40, '2022-05-18', '2022-06-19');
-insert into workExperience ( no, we_no ,dept_no, mini_no , start_date, end_date) values ( 3,2 , 50, 20, '2022-05-18', '2022-06-19');
-insert into workExperience ( no, we_no ,dept_no, mini_no , start_date, end_date) values ( 4,2 , 50, 60, '2022-05-18', '2022-06-19');
-insert into workExperience ( no, we_no ,dept_no, mini_no , start_date, end_date) values ( 5,2 , 40, 70, '2022-05-18', '2022-06-19');
-insert into workExperience ( no, we_no ,dept_no, mini_no , start_date, end_date) values ( 5,2 , 20, 30, '2022-05-18', '2022-06-19');
-insert into workExperience ( no, we_no ,dept_no, mini_no , start_date, end_date) values ( 6,2 , 70, 80, '2022-05-18', '2022-06-19');
-
-insert into workExperience ( no, we_no ,dept_no, mini_no , start_date, end_date) values ( 1,3 , 20, 40, '2022-05-18', '2022-06-19');
-insert into workExperience ( no, we_no ,dept_no, mini_no , start_date, end_date) values ( 2,3 , 10, 40, '2022-05-18', '2022-06-19');
-
-insert into workExperience ( no, we_no ,dept_no, mini_no , start_date, end_date) values ( 4,3 , 70, 60, '2022-05-18', '2022-06-19');
-insert into workExperience ( no, we_no ,dept_no, mini_no , start_date, end_date) values ( 5,3 , 80, 70, '2022-05-18', '2022-06-19');
-insert into workExperience ( no, we_no ,dept_no, mini_no , start_date, end_date) values ( 6,3 , 10, 30, '2022-05-18', '2022-06-19');
-
-insert into workExperience ( no, we_no ,dept_no, mini_no , start_date, end_date) values ( 1,4 , 30, 50, '2022-05-18', '2022-06-19');
-insert into workExperience ( no, we_no ,dept_no, mini_no , start_date, end_date) values ( 2,4 , 10, 60, '2022-05-18', '2022-06-19');
-
-insert into workExperience ( no, we_no ,dept_no, mini_no , start_date, end_date) values ( 4,4 , 40, 80, '2022-05-18', '2022-06-19');
-insert into workExperience ( no, we_no ,dept_no, mini_no , start_date, end_date) values ( 5,4 , 20, 30, '2022-05-18', '2022-06-19');
-insert into workExperience ( no, we_no ,dept_no, mini_no , start_date, end_date) values ( 6,4 , 40, 70, '2022-05-18', '2022-06-19');
-
-
-insert into workExperience ( no, we_no ,dept_no, mini_no , start_date, end_date) values ( 1,5 , 40, 20, '2022-05-18', '2022-06-19');
-insert into workExperience ( no, we_no ,dept_no, mini_no , start_date, end_date) values ( 2,5 , 60, 30, '2022-05-18', '2022-06-19');
+--insert into workExperience ( no, we_no ,dept_no, mini_no , start_date, end_date) values ( 1,1 , 60, 30, '2022-05-18', '2022-06-19');
+--insert into workExperience ( no, we_no ,dept_no, mini_no , start_date, end_date) values ( 1,2 , 10, 20, '2022-05-18', '2022-06-19');
+--insert into workExperience ( no, we_no ,dept_no, mini_no , start_date, end_date) values ( 1,3 , 20, 40, '2022-05-18', '2022-06-19');
+--insert into workExperience ( no, we_no ,dept_no, mini_no , start_date, end_date) values ( 1,3 , 70, 60, '2022-05-18', '2022-06-19');
+--insert into workExperience ( no, we_no ,dept_no, mini_no , start_date, end_date) values ( 1,4 , 30, 50, '2022-05-18', '2022-06-19');
+--insert into workExperience ( no, we_no ,dept_no, mini_no , start_date, end_date) values ( 1,5 , 40, 20, '2022-05-18', '2022-06-19');
 
 
 drop table salary;
@@ -391,11 +365,8 @@ insert into salary (  job_position, salary_class ,money) values (1, 1, 4189900),
 (9, 30, 3328000),
 (9, 31, 3367400);
 
-show tables;
-
-insert into workExperience ( no, we_no ,dept_no, mini_no , start_date, end_date) values ( 4,5 , 40, 70, '2022-05-18', '2022-06-19');
-insert into workExperience ( no, we_no ,dept_no, mini_no , start_date, end_date) values ( 5,5 , 40, 70, '2022-05-18', '2022-06-19');
-insert into workExperience ( no, we_no ,dept_no, mini_no , start_date, end_date) values ( 6,5 , 40, 70, '2022-05-18', '2022-06-19');
+--insert into workExperience ( no, we_no ,dept_no, mini_no , start_date, end_date) values ( 1,1 , 40, 70, '2022-05-18', '2022-06-19');
+--insert into workExperience ( no, we_no ,dept_no, mini_no , start_date, end_date) values ( 1,2 , 40, 70, '2022-05-18', '2022-06-19');
 
 drop table personnel;
 
@@ -422,5 +393,7 @@ license varchar(30) not null,
 license_day date not null
 )engine=InnoDB character set = utf8;
  
-insert into license(no, lic_no, license, license_day) values
-('1', '1' ,'한컴타자 서기' ,'2020-02-05');
+
+show tables;
+--insert into license(no, lic_no, license, license_day) values
+--('1', '1' ,'한컴타자 서기' ,'2020-02-05');
